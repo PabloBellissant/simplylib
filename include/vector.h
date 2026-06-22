@@ -19,8 +19,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include <stdio.h>
-
 struct header
 {
 	uint64_t Elem_count;

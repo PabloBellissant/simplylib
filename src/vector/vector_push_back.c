@@ -8,9 +8,12 @@ bool	vector_push_back(void **vec, const void *data, const uint64_t elem_count)
 	assert(elem_count != 0);
 	struct header	*header = (struct header *)(*(char **)vec - HEADER_SIZE);
 	if (header->Elem_max - header->Elem_count < elem_count)
-		vector_resize(vec, (header->Elem_count + (elem_count - 1)) * 2);
-	if (!*vec)
-		return (false);
+	{
+		if (!vector_resize(vec, (header->Elem_count + (elem_count - 1)) * 2))
+		{
+			return (false);
+		}
+	}
 	header = (struct header *)(*(char **)vec - HEADER_SIZE);
 	memcpy(*(char **)vec + (header->Elem_size * header->Elem_count), data, (elem_count * header->Elem_size));
 	header->Elem_count += elem_count;
