@@ -3,7 +3,7 @@
 #include <string.h>
 #include <assert.h>
 
-bool	vector_push_back(void **vec, const void *data, const uint64_t elem_count)
+inline bool	vector_push_back(void **vec, const void *data, const uint64_t elem_count)
 {
 	assert(elem_count != 0);
 	struct header	*header = (struct header *)(*(char **)vec - HEADER_SIZE);

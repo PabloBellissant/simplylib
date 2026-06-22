@@ -26,7 +26,7 @@ SRCS = vector/vector_init.c \
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
-CFLAGS = -Werror -Wextra -Wall -pedantic -MD -MP -I $(INCDIR) -g3
+CFLAGS = -Werror -Wextra -Wall -pedantic -MD -MP -I $(INCDIR) -g3 -DNDEBUG=1
 AR = ar -rcs
 DEPFLAGS = -MMD -MP
 
