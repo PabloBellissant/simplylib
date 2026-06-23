@@ -23,10 +23,11 @@ SRCS = vector/vector_init.c \
 	   vector/vector_begin.c \
 	   vector/vector_end.c \
 	   vector/get_header.c \
+	   vector/resize_no_free.c \
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
-CFLAGS = -Werror -Wextra -Wall -pedantic -MD -MP -I $(INCDIR) -g3 -DNDEBUG=1
+CFLAGS = -Werror -Wextra -Wall -pedantic -MD -MP -I $(INCDIR) -g3
 AR = ar -rcs
 DEPFLAGS = -MMD -MP
 

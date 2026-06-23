@@ -3,6 +3,8 @@
 #include <string.h>
 #include <assert.h>
 
+void	*resize_no_free(void **vec, const uint64_t new_size);
+
 bool	vector_insert(void **vec, const void *data, const uint64_t elem_count, const uint64_t pos)
 {
 	assert(elem_count != 0);
@@ -10,8 +12,17 @@ bool	vector_insert(void **vec, const void *data, const uint64_t elem_count, cons
 	assert(pos <= header->Elem_count);
 	if (header->Elem_max - header->Elem_count < elem_count)
 	{
-		if (!vector_resize(vec, (header->Elem_count + (elem_count - 1)) * 2))
+		// realloc
+		void	*old_vec = resize_no_free(vec, (header->Elem_count + (elem_count - 1)) * 2); // We cannot use vector_resize, bc data could be the vector itself, and vector_resize free the old data.
+		if (!old_vec)
 			return (false);
+		header = (struct header *)(*(char **)vec - HEADER_SIZE);
+		char	*new_pos = *(char **)vec + (header->Elem_size * pos);
+		memmove(new_pos + (elem_count * header->Elem_size), new_pos, header->Elem_count * header->Elem_size);
+		memcpy(new_pos, data, elem_count * header->Elem_size);
+		header->Elem_count += elem_count;
+		vector_free(old_vec);
+		return (true);
 	}
 	header = (struct header *)(*(char **)vec - HEADER_SIZE);
 	char	*new_pos = *(char **)vec + (header->Elem_size * pos);
