@@ -50,3 +50,5 @@ void		vector_erase(void *vec, const uint64_t index, const uint64_t elem_count);
 
 uint64_t	vector_begin(const void *vec);
 uint64_t	vector_end(const void *vec);
+
+int			vector_iterate(void *vec, int(*f)(void *));
