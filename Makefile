@@ -25,6 +25,8 @@ SRCS = vector/vector_init.c \
 	   vector/get_header.c \
 	   vector/resize_no_free.c \
 	   vector/vector_iterate.c \
+	   vector/vector_swap_elem.c \
+	   vector/vector_swap_and_pop.c \
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 

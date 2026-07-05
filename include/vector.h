@@ -52,3 +52,5 @@ uint64_t	vector_begin(const void *vec);
 uint64_t	vector_end(const void *vec);
 
 int			vector_iterate(void *vec, int(*f)(void *));
+void		vector_swap_elem(void *vec, const uint64_t index_a, const uint64_t index_b);
+void		vector_swap_and_pop(void *vec, const uint64_t index, const uint64_t count);

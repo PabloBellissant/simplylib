@@ -5,6 +5,7 @@
 
 struct header	*get_header(const void *vec);
 
+// Slow, consider using vector_swap_and_pop() if index does not count.
 void	vector_erase(void *vec, const uint64_t index, const uint64_t elem_count)
 {
 	struct header	*header = get_header(vec);
