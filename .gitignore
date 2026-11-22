@@ -1,4 +1,5 @@
 .cache
 compile_commands.json
-simplylib.a
 .obj
+example
+obj

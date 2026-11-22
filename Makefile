@@ -1,47 +1,32 @@
-NAME = simplylib.a
+NAME = example
 
-SRCDIR = src
-OBJDIR = .obj
-INCDIR = include
+SRCDIR = .
+OBJDIR = obj
+INCDIR = .
 
-SRCS = vector/vector_init.c \
-	   vector/vector_at.c \
-	   vector/vector_free.c \
-	   vector/vector_front.c \
-	   vector/vector_back.c \
-	   vector/vector_size.c \
-	   vector/vector_capacity.c \
-	   vector/vector_reserve.c \
-	   vector/vector_shrink.c \
-	   vector/vector_clear.c \
-	   vector/vector_empty.c \
-	   vector/vector_resize.c \
-	   vector/vector_push_back.c \
-	   vector/vector_pop_back.c \
-	   vector/vector_insert.c \
-	   vector/vector_erase.c \
-	   vector/vector_begin.c \
-	   vector/vector_end.c \
-	   vector/get_header.c \
-	   vector/resize_no_free.c \
-	   vector/vector_iterate.c \
-	   vector/vector_swap_elem.c \
-	   vector/vector_swap_and_pop.c \
+SRCS =	$(addprefix $(SRCDIR)/, \
+		example.c )
 
-OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+DEPS = $(OBJS:.o=.d)
 
-CFLAGS = -Werror -Wextra -Wall -pedantic -MD -MP -I $(INCDIR) -g3
-AR = ar -rcs
+CFLAGS = -Wall -Wextra -Werror -pedantic -I $(INCDIR) -g
+LDFLAGS = -lX11 -lXext -lm -lz
 DEPFLAGS = -MMD -MP
+MAKEFLAGS = --no-print-directory
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
+fast: CFLAGS += -Ofast
+fast: $(NAME)
+
 $(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+$(OBJDIR)/%.o: %.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJDIR)
@@ -52,6 +37,11 @@ fclean: clean
 re: fclean
 	make all
 
--include $(OBJS:.o=.d)
+refast: fclean
+	make fast
 
-.PHONY: all clean fclean re
+bonus: all
+
+-include $(DEPS)
+
+.PHONY: all clean fclean re bonus FORCE
