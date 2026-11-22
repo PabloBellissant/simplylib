@@ -1,5 +1,5 @@
 #define SIMPLY_VECTOR_IMPLEMENTATION // <-- Need to define implementation ONE time, in only one file. Usualy the main.c
-#include "vector.h"
+#include "svector.h"
 
 #include <stdio.h>
 
