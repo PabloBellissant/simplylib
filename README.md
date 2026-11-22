@@ -1,6 +1,6 @@
 # A simple C library, that recreate c++ std::vector
 
-example : 
+# Example : 
 ```c
 #define SIMPLY_VECTOR_IMPLEMENTATION // Need one and only one implementation, next file will only need to include svector.h
 #include "svector.h"
@@ -25,7 +25,12 @@ int main(void)
 
 See ([Examples](/example.c)) for other examples.
 
-- All macro/functions exposed by the api :
+# Usage :
+- To use the library, you only have to add the header file svector.h in your includes, and define SIMPLY_VECTOR_IMPLEMENTATION one time in one file.
+
+
+
+# All macro/functions exposed by the api :
 
 |Macro name|description|return_type|parameters|can fail|
 |-|-|-|-|-|
