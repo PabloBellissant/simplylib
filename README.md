@@ -56,4 +56,4 @@ See ([Examples](/example.c)) for other examples.
 |VECTOR_SWAP_AND_POP|Remove count index element, without preserving the order of the vector|void|vec, index, count|No|
 
 # Authors
-- ([Bellissant Pablo](https://github.com/PabloBellissant))
+- [Bellissant Pablo](https://github.com/PabloBellissant)
